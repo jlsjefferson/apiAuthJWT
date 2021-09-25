@@ -35,6 +35,6 @@ class Util {
       message: this.message
     });
   }
-};
+}
 
 module.exports = Util;
