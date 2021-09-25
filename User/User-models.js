@@ -16,7 +16,7 @@ class UserModel {
       console.log(error)
   
     }
-  };
+  }
 
   async getByID(id){
     try {
@@ -30,7 +30,7 @@ class UserModel {
     } catch (error) {
       console.log(error)
     }
-  };
+  }
 
   async Store(username, email, password, role){
 
@@ -49,23 +49,20 @@ class UserModel {
       email,
       password: hash,
       role
-    });
-  };
+    })
+  }
 
   async findEmail(email){
     try {
       var result = await Mysql_Conn.select("*").table('user').where({
         email: email
       });
-      if (result > 0) {
-        return true;
-      } else {
-        return false
-      }
+      return !!result.length > 0;
+
     } catch (error) {
   
     }
-  };
+  }
 
   async updateUser(id, email, username, role){
 
