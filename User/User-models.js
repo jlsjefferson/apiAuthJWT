@@ -36,10 +36,6 @@ class UserModel {
 
     const hash = await bcrypt.hash(password, 10);
   
-    const exists = await Mysql_Conn.select('*')
-      .from('user')
-      .where('email', email);
-  
     if (exists.length) {
       throw new Error('email já cadastrado');
     }
