@@ -1,5 +1,5 @@
-var express = require("express")
-var app = express();  // Compliant
+const express = require("express")
+const app = express();  // Compliant
 app.disable("x-powered-by");
 
 
