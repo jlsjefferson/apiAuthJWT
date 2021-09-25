@@ -26,7 +26,6 @@ class UserController {
         util.setSuccess(200, data);
       }
   
-      req.io.emit('update-localizacao');
       return util.send(res);
     } catch (err) {
       util.setError(500, err.message);

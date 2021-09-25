@@ -1,17 +1,17 @@
 const Util = require('../utils/Utils');
-const {Store} = require('./Localizacao-models');
+const {Store} = require('./User-models');
 
 const util = new Util();
 
 /**
- * The LocalizacaoController.
+ * The UserController.
  *
  * @method store  store
  */
 
-class LocalizacaoController {
+class UserController {
 
-   // cadLocal
+ 
   async store(req, res) {
     try {
       const {
@@ -31,7 +31,6 @@ class LocalizacaoController {
         util.setSuccess(200, data);
       }
 
-      req.io.emit('update-localizacao');
       return util.send(res);
     } catch (err) {
       util.setError(500, err.message);
@@ -40,4 +39,4 @@ class LocalizacaoController {
   }
 }
 
-module.exports = LocalizacaoController;
+module.exports = UserController;

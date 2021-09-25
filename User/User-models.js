@@ -1,22 +1,22 @@
-const { Sqn_Conn } = require('../database/connection');
+const { Mysql_Conn } = require('../database/connection');
 
 
 const Store = async (
-  name,
+  username,
   email,
   password,
   role
 ) => {
-  const exists = await Sqn_Conn.select('*')
-    .from('users')
+  const exists = await Mysql_Conn.select('*')
+    .from('user')
     .where('email', email);
 
   if (exists.length) {
     throw new Error('existing record');
   }
 
-  await Sqn_Conn('users').insert({
-    name,
+  await Mysql_Conn('user').insert({
+    username,
     email,
     password,
     role
