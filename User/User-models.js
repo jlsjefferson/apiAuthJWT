@@ -10,8 +10,8 @@ class UserModel {
 
   async getAll(){
     try {
-      const result = await Mysql_Conn.select("id", "email", "username", "role").table("user");
-      return result;
+      return await Mysql_Conn.select("id", "email", "username", "role").table("user");
+     
     } catch (error) {
       console.log(error)
   
@@ -71,7 +71,7 @@ class UserModel {
       if (email != undefined) {
         if (email != user.email) {
           var result = await this.findEmail(email)
-          if (result == false) {
+          if (result && result != false) {
             editUser.email = email
           }else{
             return {
