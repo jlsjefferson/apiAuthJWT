@@ -1,5 +1,9 @@
 var express = require("express")
-var app = express()
+var app = express();  // Compliant
+app.disable("x-powered-by");
+
+
+
 const UserRoutes = require('./User/User-routes');
  
 // parse application/x-www-form-urlencoded
