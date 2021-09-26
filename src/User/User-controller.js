@@ -60,6 +60,25 @@ class UserController {
       return util.send(res);
     }
   }
+
+  async remove(req, res){
+    try {
+      const id = req.params.id;
+      const data = await UserModel.delete(id)
+
+      if(data.status){
+        res.status(200)
+        res.send("Sucess OK")
+      }
+      else {
+        res.status(406);
+        res.send(data.err);
+      }
+    } catch (error) {
+      util.setError(500, error.message);
+      return util.send(res);
+    }
+  }
 }
 
 module.exports = UserController;

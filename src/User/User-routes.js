@@ -8,6 +8,6 @@ router
   .post("/user", userController.store)
   .get("/user", userController.index)
   .get("/user/:id", userController.findUser)
-  .put("/user", userController.update);
-
+  .put("/user", userController.update)
+  .delete("/user/:id",userController.remove)
 module.exports = router;

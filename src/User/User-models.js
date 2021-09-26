@@ -67,6 +67,23 @@ class UserModel {
       role,
     });
   }
+
+  async delete(id){
+    const user = await this.getByID(id)
+    if(user.length == 1){
+      try {
+        await Mysql_Conn("user").where({id}).delete()
+        return { status: true };
+      } catch (err) {
+        return { status: false, err: err };
+      }     
+    }else{
+      return {
+        status: false,
+        err: "user not found."
+      }
+    }
+  }
 }
 
 module.exports = new UserModel();
