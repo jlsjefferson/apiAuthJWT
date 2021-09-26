@@ -6,7 +6,10 @@ const util = new Util();
 /**
  * The UserController.
  *
+ * @method index  store
+ * @method findUser  findUser
  * @method store  store
+ * @method update  update
  */
 
 class UserController {
@@ -44,21 +47,17 @@ class UserController {
     }
   }
 
-  async edit(req, res) {
-    var { id, username, role, email } = req.body;
-    var result = await UserModel.updateUser(id, username, role, email);
-    console.log(result);
-    if (result != undefined) {
-      if (result.status) {
-        res.status(200);
-        res.send("Tudo OK!");
-      } else {
-        res.status(406);
-        res.send(result.err);
+  async update(req, res) {
+    try {
+      const { id, email, username, role } = req.body;
+      const data = await UserModel.updateUser(id, email, username, role);
+      if (!data) {
+        util.setSuccess(200, data);
       }
-    } else {
-      res.status(406);
-      res.send("Ocorreu um erro no servidor!");
+      return util.send(res);
+    } catch (err) {
+      util.setError(500, err.message);
+      return util.send(res);
     }
   }
 }
