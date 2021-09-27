@@ -1,5 +1,5 @@
 const Util = require("../utils/Utils");
-const { Mysql_Conn } = require("../database/connection");
+const { Mysql_Conn,Sql_Conn } = require("../database/connection");
 const bcrypt = require("bcrypt");
 
 const util = new Util();
@@ -7,7 +7,7 @@ const util = new Util();
 class UserModel {
   async findEmail(email) {
     try {
-      return Mysql_Conn.select("email").table("user").where({
+      return Sql_Conn.select("email").table("user").where({
         email: email,
       });
     } catch (error) {
@@ -17,7 +17,7 @@ class UserModel {
 
   async getAll() {
     try {
-      return Mysql_Conn.select("id", "email", "username", "role").table("user");
+      return Sql_Conn.select("id", "email", "username", "role").table("user");
     } catch (error) {
       console.log(error);
     }
@@ -25,7 +25,7 @@ class UserModel {
 
   async getByID(id) {
     try {
-      const result = await Mysql_Conn.select("id", "email", "username", "role")
+      const result = await Sql_Conn.select("id", "email", "username", "role")
         .table("user")
         .where("id", id);
       if (!result) {
@@ -43,7 +43,7 @@ class UserModel {
     if (exists.length > 0) {
       throw new Error("email já cadastrado");
     }
-    await Mysql_Conn("user").insert({
+    await Sql_Conn("user").insert({
       username,
       email,
       password: hash,
@@ -61,7 +61,7 @@ class UserModel {
     if (user.length == 0) {
       throw new Error("usuario nao existe");
     }
-    await Mysql_Conn("user").where({ id }).update({
+    await Sql_Conn("user").where({ id }).update({
       email,
       username,
       role,
@@ -72,7 +72,7 @@ class UserModel {
     const user = await this.getByID(id)
     if(user.length == 1){
       try {
-        await Mysql_Conn("user").where({id}).delete()
+        await Sql_Conn("user").where({id}).delete()
         return { status: true };
       } catch (err) {
         return { status: false, err: err };
