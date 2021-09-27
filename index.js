@@ -4,7 +4,7 @@ app.disable("x-powered-by");
 
 
 
-const UserRoutes = require('./src/User/User-routes');
+const UserRoutes = require('./src/modules/User/User-routes');
  
 // parse application/x-www-form-urlencoded
 app.use(express.urlencoded({ extended: true }));

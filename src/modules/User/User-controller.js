@@ -1,4 +1,4 @@
-const Util = require("../utils/Utils");
+const Util = require("../../utils/Utils");
 const UserModel = require("./User-models");
 
 const util = new Util();
@@ -33,8 +33,8 @@ class UserController {
 
   async store(req, res) {
     try {
-      const { name, email, password, role } = req.body;
-      const data = await UserModel.Store(name, email, password, role);
+      const { username, email, password, role } = req.body;
+      const data = await UserModel.Store(username, email, password, role);
 
       if (!data) {
         util.setSuccess(200, data);
